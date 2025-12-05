@@ -1,0 +1,17 @@
+{
+    "name": "poke-explorer",
+    "version": "1.0.0",
+    "description": "Pokemon Explorer - WDD 330 Final Project by Ederson Villalba",
+    "main": "main.js",
+    "scripts": {
+        "start": "vite",
+        "dev": "vite",
+        "build": "vite build --emptyOutDir",
+        "preview": "vite preview"
+    },
+    "author": "Ederson Villalba",
+    "license": "ISC",
+    "devDependencies": {
+        "vite": "^5.4.7"
+    }
+}
