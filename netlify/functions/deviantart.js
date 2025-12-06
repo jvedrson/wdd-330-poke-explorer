@@ -24,8 +24,22 @@ exports.handler = async (event) => {
     }
 
     // Remove the function path prefix that is added by Netlify
-    let path = event.path.replace('/.netlify/functions/deviantart', '');
-    if (!path) path = '/';
+    // Path can be either /.netlify/functions/deviantart/xxx or /api/deviantart/xxx (from redirect)
+    let path = event.path;
+
+    if (path.startsWith('/.netlify/functions/deviantart')) {
+        path = path.replace('/.netlify/functions/deviantart', '');
+    } else if (path.startsWith('/api/deviantart')) {
+        path = path.replace('/api/deviantart', '');
+    }
+
+    if (!path || path === '') {
+        path = '/';
+    }
+
+    console.log('Original path:', event.path);
+    console.log('Processed path:', path);
+    console.log('Method:', event.httpMethod);
 
     const url = `https://www.deviantart.com${path}`;
 
