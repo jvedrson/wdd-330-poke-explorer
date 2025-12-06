@@ -88,7 +88,7 @@ export class PokemonDetail {
                         <span class="detail-number">${formatPokemonId(this.pokemon.id)}</span>
                     </div>
                     <button class="favorite-btn ${isFav ? 'active' : ''}" id="favorite-btn">
-                        <img src="${isFav ? './public/images/heart-fill.svg' : './public/images/heart.svg'}" alt="Favorite" class="heart-icon">
+                        <img src="${isFav ? '/images/heart-fill.svg' : '/images/heart.svg'}" alt="Favorite" class="heart-icon">
                     </button>
                 </div>
                 
@@ -327,10 +327,10 @@ export class PokemonDetail {
 
         if (result.action === 'added') {
             btn.classList.add('active');
-            heartIcon.src = './public/images/heart-fill.svg';
+            heartIcon.src = '/images/heart-fill.svg';
         } else {
             btn.classList.remove('active');
-            heartIcon.src = './public/images/heart.svg';
+            heartIcon.src = '/images/heart.svg';
         }
     }
 }
