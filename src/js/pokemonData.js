@@ -64,3 +64,49 @@ export async function getPokemonByName(name) {
         throw error;
     }
 }
+
+export async function getPokemonTypes() {
+    try {
+        const response = await fetch(`${BASE_URL}/type`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error('Error fetching Pokemon types:', error);
+        throw error;
+    }
+}
+
+export async function getPokemonSpecies(id) {
+    try {
+        const response = await fetch(`${BASE_URL}/pokemon-species/${id}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching Pokemon species:', error);
+        throw error;
+    }
+}
+
+export async function getEvolutionChain(url) {
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching evolution chain:', error);
+        throw error;
+    }
+}

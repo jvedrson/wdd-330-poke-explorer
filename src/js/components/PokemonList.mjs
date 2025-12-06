@@ -1,6 +1,6 @@
-import { getPokemonList } from '../api/pokeapi.mjs';
+import { getPokemonList } from '../pokemonData.js';
 import { createPokemonCard } from './PokemonCard.mjs';
-import { showLoading, showError } from '../utils/helpers.mjs';
+import { showLoading, showError } from '../utilities.js';
 
 export class PokemonList {
     constructor(containerSelector) {
@@ -40,12 +40,10 @@ export class PokemonList {
     }
 
     filterByType(type) {
-        // TODO: implement later
         console.log('Filter by type:', type);
     }
 
     searchByName(query) {
-        // TODO: implement later
         console.log('Search by name:', query);
     }
 }

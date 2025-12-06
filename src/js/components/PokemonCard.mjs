@@ -1,4 +1,4 @@
-import { formatPokemonId, getPokemonSprite } from '../utils/helpers.mjs';
+import { formatPokemonId, getPokemonSprite } from '../utilities.js';
 
 export function createPokemonCard(pokemon) {
   const card = document.createElement('div');
@@ -40,7 +40,5 @@ function createTypeBadges(types) {
 }
 
 function handleCardClick(pokemon) {
-  console.log('Pokemon clicked:', pokemon.name);
-  // TODO: detail page coming soon
-  alert(`${pokemon.name} details coming soon!`);
+  window.location.href = `./detail.html?id=${pokemon.id}`;
 }

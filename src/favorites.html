@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Favorite Pokemon - Poke-Explorer">
+    <title>Favorites - Poke-Explorer</title>
+    <link rel="icon" href="./public/images/pokeball.webp">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/favorites.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="./index.html" class="logo">
+                <img src="./public/images/pokeball.webp" alt="Pokeball" class="logo-icon">
+                <span>Poke-Explorer</span>
+            </a>
+
+            <nav class="nav">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./favorites.html" class="nav-link active">Favorites</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="main">
+        <div class="container">
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">My Favorite Pokemon</h2>
+                    <p class="section-subtitle">Your saved Pokemon collection</p>
+                </div>
+
+                <div id="favorites-grid" class="pokemon-grid">
+                    <!-- Favorite Pokemon cards will be loaded here -->
+                </div>
+
+                <div id="empty-state" class="empty-state hidden">
+                    <p>No favorite Pokemon yet!</p>
+                    <p>Click the heart button on any Pokemon to add them to your favorites.</p>
+                    <a href="./index.html" class="hero-button">Browse Pokemon</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 Poke-Explorer</p>
+                <p class="footer-text">
+                    Data from <a href="https://pokeapi.co/" target="_blank" class="footer-link">PokéAPI</a>
+                </p>
+                <p class="footer-text">
+                    WDD 330 Final Project by Ederson Villalba - BYU - 2025
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./js/favorites.js"></script>
+</body>
+
+</html>

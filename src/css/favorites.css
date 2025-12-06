@@ -1,0 +1,23 @@
+/* Favorites page styles */
+
+.remove-favorite-btn {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-xs);
+    transition: transform var(--transition-base);
+}
+
+.remove-favorite-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Empty state when no favorites */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-3xl);
+}
+
+.empty-state p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}

@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import url('variables.css');
 
-/* Reset */
+/* Reset default styles */
 *,
 *::before,
 *::after {
@@ -76,7 +76,7 @@ h4 {
     font-size: var(--font-size-xl);
 }
 
-/* Container */
+/* Layout */
 .container {
     width: 100%;
     max-width: var(--container-xl);
@@ -135,7 +135,7 @@ h4 {
     color: var(--primary-red);
 }
 
-/* Hero */
+/* Hero section */
 .hero {
     background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--primary-red) 100%);
     color: white;
@@ -169,7 +169,7 @@ h4 {
     transform: translateY(-2px);
 }
 
-/* Main */
+/* Main content */
 .main {
     padding: var(--spacing-2xl) 0;
 }
@@ -192,7 +192,7 @@ h4 {
     font-size: var(--font-size-lg);
 }
 
-/* Pokemon Grid */
+/* Pokemon grid layout */
 .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -200,7 +200,7 @@ h4 {
     margin-top: var(--spacing-xl);
 }
 
-/* Pokemon Card */
+/* Pokemon card */
 .pokemon-card {
     background-color: var(--bg-card);
     border-radius: var(--radius-lg);
@@ -267,7 +267,7 @@ h4 {
     text-transform: capitalize;
 }
 
-/* Type colors */
+/* Pokemon type colors */
 .type-normal {
     background-color: var(--type-normal);
 }
@@ -340,7 +340,7 @@ h4 {
     background-color: var(--type-fairy);
 }
 
-/* Loading */
+/* Loading spinner */
 .loading {
     text-align: center;
     padding: var(--spacing-3xl);
@@ -367,7 +367,6 @@ h4 {
     font-size: var(--font-size-lg);
 }
 
-/* Error */
 .error {
     text-align: center;
     padding: var(--spacing-2xl);
@@ -381,7 +380,6 @@ h4 {
     margin-bottom: var(--spacing-sm);
 }
 
-/* Footer */
 .footer {
     background-color: var(--bg-primary);
     border-top: 1px solid var(--bg-secondary);
@@ -408,7 +406,13 @@ h4 {
     color: var(--primary-red);
 }
 
-/* Responsive */
+/* Heart icon styles */
+.favorite-btn .heart-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive styles for tablets */
 @media (max-width: 768px) {
     .hero-title {
         font-size: var(--font-size-3xl);
@@ -424,6 +428,7 @@ h4 {
     }
 }
 
+/* Responsive styles for mobile */
 @media (max-width: 480px) {
     .hero {
         padding: var(--spacing-2xl) 0;
@@ -438,6 +443,7 @@ h4 {
     }
 }
 
+/* Utility class */
 .hidden {
     display: none;
 }

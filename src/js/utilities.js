@@ -62,3 +62,69 @@ export function getPokemonSprite(pokemon) {
         pokemon.sprites.front_default ||
         'https://via.placeholder.com/150?text=No+Image';
 }
+
+const FAVORITES_KEY = 'pokemonFavorites';
+
+export function getFavorites() {
+    const favorites = localStorage.getItem(FAVORITES_KEY);
+    return favorites ? JSON.parse(favorites) : [];
+}
+
+export function addFavorite(pokemon) {
+    const favorites = getFavorites();
+
+    const exists = favorites.find(fav => fav.id === pokemon.id);
+    if (exists) {
+        return favorites;
+    }
+
+    const favoriteData = {
+        id: pokemon.id,
+        name: pokemon.name,
+        sprite: pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default,
+        types: pokemon.types.map(t => t.type.name)
+    };
+
+    favorites.push(favoriteData);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+
+    return favorites;
+}
+
+export function removeFavorite(id) {
+    const favorites = getFavorites();
+    const filtered = favorites.filter(fav => fav.id !== id);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(filtered));
+
+    return filtered;
+}
+
+export function isFavorite(id) {
+    const favorites = getFavorites();
+    return favorites.some(fav => fav.id === id);
+}
+
+export function toggleFavorite(pokemon) {
+    if (isFavorite(pokemon.id)) {
+        return { action: 'removed', favorites: removeFavorite(pokemon.id) };
+    } else {
+        return { action: 'added', favorites: addFavorite(pokemon) };
+    }
+}
+
+const LAST_VIEWED_KEY = 'pokemonLastViewed';
+
+export function saveLastViewed(pokemon) {
+    const lastViewed = {
+        id: pokemon.id,
+        name: pokemon.name,
+        sprite: pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default,
+        timestamp: Date.now()
+    };
+    localStorage.setItem(LAST_VIEWED_KEY, JSON.stringify(lastViewed));
+}
+
+export function getLastViewed() {
+    const data = localStorage.getItem(LAST_VIEWED_KEY);
+    return data ? JSON.parse(data) : null;
+}
