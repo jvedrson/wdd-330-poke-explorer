@@ -1,6 +1,6 @@
 import { getPokemonById, getPokemonSpecies, getEvolutionChain } from '../pokemonData.js';
 import { formatPokemonId, getPokemonSprite, showLoading, showError, toggleFavorite, isFavorite, saveLastViewed } from '../utilities.js';
-import { searchPokemonImages } from '../imageservice.js';
+import { searchPokemonImages } from '../imageService.js';
 
 export class PokemonDetail {
     constructor(containerId) {
