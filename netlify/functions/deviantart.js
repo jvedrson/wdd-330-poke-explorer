@@ -41,7 +41,18 @@ exports.handler = async (event) => {
     console.log('Processed path:', path);
     console.log('Method:', event.httpMethod);
 
-    const url = `https://www.deviantart.com${path}`;
+    // Use the correct DeviantArt API base URL
+    // For OAuth2 token endpoint, use www.deviantart.com
+    // For API endpoints (browse, etc), use www.deviantart.com/api/v1/oauth2
+    let baseUrl;
+    if (path.startsWith('/oauth2/token')) {
+        baseUrl = 'https://www.deviantart.com';
+    } else {
+        baseUrl = 'https://www.deviantart.com/api/v1/oauth2';
+    }
+
+    const url = `${baseUrl}${path}`;
+
 
     try {
         const options = {
@@ -55,22 +66,38 @@ exports.handler = async (event) => {
             options.body = event.body;
         }
 
-        // Handle GET requests
+        let fullUrl = url;
+
+        // Handle GET requests with query parameters
         if (event.httpMethod === 'GET' && event.queryStringParameters) {
             const params = new URLSearchParams(event.queryStringParameters);
-            const fullUrl = `${url}?${params}`;
-            const response = await fetch(fullUrl, options);
-            const data = await response.json();
-
-            return {
-                statusCode: response.status,
-                headers,
-                body: JSON.stringify(data),
-            };
+            fullUrl = `${url}?${params}`;
         }
 
-        const response = await fetch(url, options);
-        const data = await response.json();
+        console.log('Fetching URL:', fullUrl);
+        const response = await fetch(fullUrl, options);
+
+        // Get response as text first
+        const text = await response.text();
+        console.log('Response status:', response.status);
+        console.log('Response text (first 200 chars):', text.substring(0, 200));
+
+        // Try to parse as JSON
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            // If parsing fails, return the text as error
+            console.error('JSON parse error:', e.message);
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({
+                    error: 'Invalid response from DeviantArt',
+                    details: text.substring(0, 500)
+                }),
+            };
+        }
 
         return {
             statusCode: response.status,
@@ -78,6 +105,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(data),
         };
     } catch (error) {
+        console.error('Fetch error:', error);
         return {
             statusCode: 500,
             headers,

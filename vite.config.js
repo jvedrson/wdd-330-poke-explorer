@@ -4,14 +4,23 @@ import { defineConfig } from "vite";
 export default defineConfig({
     root: "src/",
     envDir: "../",
-    
+
     server: {
         proxy: {
             '/api/deviantart': {
                 target: 'https://www.deviantart.com',
                 changeOrigin: true,
                 rewrite: (path) => {
-                    return path.replace(/^\/api\/deviantart/, '');
+                    // Remove /api/deviantart prefix
+                    const cleanPath = path.replace(/^\/api\/deviantart/, '');
+
+                    // For OAuth token endpoint
+                    if (cleanPath.startsWith('/oauth2/token')) {
+                        return cleanPath;
+                    }
+
+                    // For API endpoints
+                    return `/api/v1/oauth2${cleanPath}`;
                 },
                 secure: true,
                 configure: (proxy, _options) => {
@@ -28,7 +37,7 @@ export default defineConfig({
             }
         }
     },
-    
+
     build: {
         outDir: "../dist",
         emptyOutDir: true,
