@@ -7,8 +7,16 @@
     <meta name="description" content="Pokemon Details - Poke-Explorer">
     <title>Pokemon Details - Poke-Explorer</title>
     <link rel="icon" href="/images/pokeball.webp">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="preconnect" href="https://pokeapi.co">
+    <link rel="dns-prefetch" href="https://pokeapi.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./css/detail.css" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="./css/styles.css">
+      <link rel="stylesheet" href="./css/detail.css">
+    </noscript>
 </head>
 
 <body>
@@ -16,7 +24,7 @@
     <header class="header">
         <div class="container header-container">
             <a href="./index.html" class="logo">
-                <img src="/images/pokeball.webp" alt="Pokeball" class="logo-icon">
+                <img src="/images/pokeball.webp" alt="Pokeball" class="logo-icon" width="32" height="32" loading="eager">
                 <span>Poke-Explorer</span>
             </a>
 

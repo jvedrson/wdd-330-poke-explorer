@@ -112,19 +112,40 @@ export function toggleFavorite(pokemon) {
     }
 }
 
-const LAST_VIEWED_KEY = 'pokemonLastViewed';
+const PREFERENCES_KEY = 'pokemonPreferences';
+const SEARCH_HISTORY_KEY = 'pokemonSearchHistory';
 
-export function saveLastViewed(pokemon) {
-    const lastViewed = {
-        id: pokemon.id,
-        name: pokemon.name,
-        sprite: pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default,
-        timestamp: Date.now()
+export function getPreferences() {
+    const defaults = {
+        sortBy: 'number',
+        gridSize: 'medium'
     };
-    localStorage.setItem(LAST_VIEWED_KEY, JSON.stringify(lastViewed));
+    const data = localStorage.getItem(PREFERENCES_KEY);
+    return data ? { ...defaults, ...JSON.parse(data) } : defaults;
 }
 
-export function getLastViewed() {
-    const data = localStorage.getItem(LAST_VIEWED_KEY);
-    return data ? JSON.parse(data) : null;
+export function savePreference(key, value) {
+    const prefs = getPreferences();
+    prefs[key] = value;
+    localStorage.setItem(PREFERENCES_KEY, JSON.stringify(prefs));
+}
+
+export function getSearchHistory() {
+    const data = localStorage.getItem(SEARCH_HISTORY_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+export function addToSearchHistory(query) {
+    if (!query || query.trim() === '') return;
+
+    const history = getSearchHistory();
+    const filtered = history.filter(item => item.toLowerCase() !== query.toLowerCase());
+    filtered.unshift(query.toLowerCase());
+
+    const limited = filtered.slice(0, 10);
+    localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(limited));
+}
+
+export function clearSearchHistory() {
+    localStorage.removeItem(SEARCH_HISTORY_KEY);
 }

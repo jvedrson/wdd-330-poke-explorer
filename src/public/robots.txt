@@ -1,0 +1,5 @@
+# robots.txt for Poke-Explorer
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /

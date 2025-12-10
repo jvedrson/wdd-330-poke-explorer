@@ -41,6 +41,8 @@ export default defineConfig({
     build: {
         outDir: "../dist",
         emptyOutDir: true,
+        minify: 'esbuild',
+        cssMinify: true,
         rollupOptions: {
             input: {
                 main: resolve(__dirname, "src/index.html"),
@@ -48,5 +50,6 @@ export default defineConfig({
                 favorites: resolve(__dirname, "src/favorites.html"),
             },
         },
+        chunkSizeWarningLimit: 1000,
     },
 });

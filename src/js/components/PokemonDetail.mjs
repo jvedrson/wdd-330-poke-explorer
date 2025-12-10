@@ -1,5 +1,5 @@
 import { getPokemonById, getPokemonSpecies, getEvolutionChain } from '../pokemonData.js';
-import { formatPokemonId, getPokemonSprite, showLoading, showError, toggleFavorite, isFavorite, saveLastViewed } from '../utilities.js';
+import { formatPokemonId, getPokemonSprite, showLoading, showError, toggleFavorite, isFavorite } from '../utilities.js';
 import { searchPokemonImages } from '../imageService.js';
 
 export class PokemonDetail {
@@ -33,7 +33,6 @@ export class PokemonDetail {
             ]);
 
             this.render();
-            saveLastViewed(this.pokemon);
         } catch (error) {
             console.error('Error loading Pokemon details:', error);
             showError(this.container, 'Failed to load Pokemon details');
@@ -88,12 +87,12 @@ export class PokemonDetail {
                         <span class="detail-number">${formatPokemonId(this.pokemon.id)}</span>
                     </div>
                     <button class="favorite-btn ${isFav ? 'active' : ''}" id="favorite-btn">
-                        <img src="${isFav ? '/images/heart-fill.svg' : '/images/heart.svg'}" alt="Favorite" class="heart-icon">
+                        <img src="${isFav ? '/images/heart-fill.svg' : '/images/heart.svg'}" alt="Favorite" class="heart-icon" width="24" height="24" loading="eager">
                     </button>
                 </div>
                 
                 <div class="detail-image-container">
-                    <img src="${sprite}" alt="${this.pokemon.name}" class="detail-image">
+                    <img src="${sprite}" alt="${this.pokemon.name}" class="detail-image" loading="eager" fetchpriority="high" decoding="async">
                 </div>
                 
                 <div class="detail-types">
@@ -196,7 +195,7 @@ export class PokemonDetail {
                 <div class="evolution-item">
                     <div class="evolution-card" onclick="window.location.href='./detail.html?id=${evo.id}'">
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evo.id}.png" 
-                             alt="${evo.name}" 
+                             alt="${evo.name}" loading="lazy" decoding="async" 
                              class="evolution-image">
                         <span class="evolution-name">${evo.name}</span>
                         <span class="evolution-number">${formatPokemonId(evo.id)}</span>
@@ -214,7 +213,7 @@ export class PokemonDetail {
                 <div class="gallery-main">
                     <button class="gallery-btn gallery-btn-prev" id="gallery-prev">‹</button>
                     <div class="gallery-main-image-container">
-                        <img src="${currentImage.url}" alt="${currentImage.alt}" class="gallery-main-image" id="gallery-main-img">
+                        <img src="${currentImage.url}" alt="${currentImage.alt}" class="gallery-main-image" id="gallery-main-img" loading="lazy" decoding="async">
                         <div class="gallery-credit">
                             Photo by ${currentImage.photographer} from DeviantArt. 
                             <a class="gallery-credit-link" href="${currentImage.url}" target="_blank">Open Image</a>
@@ -225,7 +224,7 @@ export class PokemonDetail {
                 <div class="gallery-thumbnails">
                     ${this.gallery.map((image, index) => `
                         <div class="gallery-thumb ${index === this.currentImageIndex ? 'active' : ''}" data-index="${index}">
-                            <img src="${image.thumb}" alt="${image.alt}" class="gallery-thumb-img">
+                            <img src="${image.thumb}" alt="${image.alt}" class="gallery-thumb-img" loading="lazy" decoding="async">
                         </div>
                     `).join('')}
                 </div>

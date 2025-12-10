@@ -46,6 +46,8 @@ export class FavoritesList {
                     src="${pokemon.sprite}" 
                     alt="${pokemon.name}"
                     class="card-image"
+                    loading="lazy"
+                    decoding="async"
                 >
             </div>
             <h3 class="card-name">${pokemon.name}</h3>
