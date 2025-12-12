@@ -1,6 +1,6 @@
 import { PokemonList } from './components/PokemonList.mjs';
 import { SearchBar } from './searchModule.js';
-import { FilterDropdown } from './filterModule.js';
+import { FilterModule } from './filterModule.js';
 
 async function init() {
     console.log('Poke-Explorer initialized!');
@@ -12,10 +12,10 @@ async function init() {
     });
     searchBar.init();
 
-    const filterDropdown = new FilterDropdown('#filter-container', (type) => {
+    const filterModule = new FilterModule('#filter-container', (type) => {
         pokemonList.filterByType(type);
     });
-    await filterDropdown.init();
+    await filterModule.init();
 
     await pokemonList.init();
 }

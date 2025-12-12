@@ -1,6 +1,6 @@
 import { getPokemonTypes } from './pokemonData.js';
 
-export class FilterDropdown {
+export class FilterModule {
     constructor(containerId, onFilter) {
         this.container = document.querySelector(containerId);
         this.onFilter = onFilter;
